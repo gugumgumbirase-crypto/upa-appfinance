@@ -1,15 +1,40 @@
         // ==========================================
+// MOBILE SIDEBAR TOGGLE
+// ==========================================
+function toggleSidebar() {
+    const sidebar = document.getElementById('appSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (!sidebar) return;
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+    // Cegah scroll body saat sidebar terbuka
+    if (sidebar.classList.contains('open')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
+// Tutup sidebar kalau resize ke desktop
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        document.getElementById('appSidebar')?.classList.remove('open');
+        document.getElementById('sidebarOverlay')?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+        // ==========================================
         // FIREBASE CONFIGURATION
         // ==========================================
-        const firebaseConfig = {
-        apiKey: "AIzaSyCHkvx8b-bVjdCiCEXWVRjkPJnsxufYjvs",
-        authDomain: "upa-finance.firebaseapp.com",
-        projectId: "upa-finance",
-        storageBucket: "upa-finance.firebasestorage.app",
-        messagingSenderId: "676144093078",
-        appId: "1:676144093078:web:7a6cbca5989fa644ccafb7",
-        measurementId: "G-2X5J5NMHR2"
-        };
+  const firebaseConfig = {
+    apiKey: "AIzaSyATZxTImBycnkcwXO2Bi6OdfHZ4hUu1LQQ",
+    authDomain: "upa-appsfinance.firebaseapp.com",
+    projectId: "upa-appsfinance",
+    storageBucket: "upa-appsfinance.firebasestorage.app",
+    messagingSenderId: "564272461400",
+    appId: "1:564272461400:web:b30e050468a0aac5793c2d",
+    measurementId: "G-Z99C90R5FR"
+  };
         firebase.initializeApp(firebaseConfig);
         const firebaseAuth = firebase.auth();
         const firebaseDb = firebase.firestore();
@@ -226,14 +251,23 @@
         // ==========================================
         // LOGIKA SWITCH TAB
         // ==========================================
-        function switchTab(tab) {
-            activeTab = tab;
-            
-            ['iwb', 'ss', 'itb', 'kas', 'pinjaman', 'ceklis', 'bendahara', 'rekap'].forEach(t => {
-                document.getElementById(`nav-${t}`).className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 text-emerald-100 hover:bg-emerald-700/50 font-bold";
-            });
-            
-            document.getElementById(`nav-${tab}`).className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 bg-white text-emerald-800 shadow-sm font-bold";
+function switchTab(tab) {
+    activeTab = tab;
+
+    ['iwb', 'ss', 'itb', 'kas', 'pinjaman', 'ceklis', 'bendahara', 'rekap'].forEach(t => {
+        document.getElementById(`nav-${t}`).className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 text-emerald-100 hover:bg-emerald-700/50 font-bold";
+    });
+    document.getElementById(`nav-${tab}`).className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 bg-white text-emerald-800 shadow-sm font-bold";
+
+    // ⬇️ TAMBAHAN: auto-close sidebar di HP setelah pilih menu
+    if (window.innerWidth <= 768) {
+        document.getElementById('appSidebar')?.classList.remove('open');
+        document.getElementById('sidebarOverlay')?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // ... sisa kode switchTab asli tetap sama ...
+}
             
             const filterPeriode = document.getElementById('filter-periode');
             const dataTableArea = document.getElementById('data-table-area');

@@ -1,62 +1,141 @@
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* Scrollbar kustom */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #059669; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #047857; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        /* =========================================
-           EFEK SUDUT TUMPUL TABEL (Tampilan & Print)
-           ========================================= */
-        .table-rounded {
-            border-radius: 0.75rem !important;
-            overflow: hidden !important;
-            border-collapse: separate !important;
-            border-spacing: 0;
-            border: 1px solid #e2e8f0;
-        }
-        .table-rounded thead tr:first-child th:first-child { border-top-left-radius: 0.75rem !important; }
-        .table-rounded thead tr:first-child th:last-child { border-top-right-radius: 0.75rem !important; }
-        .table-rounded tfoot tr:last-child td:first-child { border-bottom-left-radius: 0.75rem !important; }
-        .table-rounded tfoot tr:last-child td:last-child { border-bottom-right-radius: 0.75rem !important; }
+/* Scrollbar kustom */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #059669; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #047857; }
 
-        /* CSS Khusus Cetak */
-        @media print {
-            body { background: white !important; }
-            aside, header, .no-print { display: none !important; }
-            .flex-1 { margin: 0 !important; padding: 0 !important; overflow: visible !important; height: auto !important; }
-            main { padding: 0 !important; overflow: visible !important; }
-            .bg-white { border: none !important; box-shadow: none !important; padding: 0 !important; }
-            
-            .overflow-x-auto { overflow: visible !important; }
-            
-            table { 
-                width: 100% !important; 
-                max-width: 100% !important;
-                font-size: 8pt !important;
-                table-layout: fixed !important;
-                word-wrap: break-word;
-            }
-            th, td { 
-                padding: 4px 2px !important; 
-                font-size: 8pt !important;
-                border: 1px solid #cbd5e1 !important; 
-            }
-            th { text-align: center !important; }
-            tr { page-break-inside: avoid; page-break-after: auto; }
-            
-            .print-page-break {
-                page-break-inside: avoid;
-                page-break-after: always; 
-            }
-            
-            .relative.h-72, .h-72 {
-                height: 250px !important;
-            }
-            
-            @page { margin: 1cm; size: landscape; }
-        }
+/* =========================================
+   EFEK SUDUT TUMPUL TABEL
+   ========================================= */
+.table-rounded {
+    border-radius: 0.75rem !important;
+    overflow: hidden !important;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    border: 1px solid #e2e8f0;
+}
+.table-rounded thead tr:first-child th:first-child { border-top-left-radius: 0.75rem !important; }
+.table-rounded thead tr:first-child th:last-child { border-top-right-radius: 0.75rem !important; }
+.table-rounded tfoot tr:last-child td:first-child { border-bottom-left-radius: 0.75rem !important; }
+.table-rounded tfoot tr:last-child td:last-child { border-bottom-right-radius: 0.75rem !important; }
 
-        /* Sembunyikan elemen jika bukan editor */
-        body.readonly .editor-only { display: none !important; }
+/* =========================================
+   SIDEBAR OVERLAY (HP)
+   ========================================= */
+#sidebarOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 65;
+}
+#sidebarOverlay.active { display: block; }
+
+/* =========================================
+   MOBILE FRIENDLY (max-width: 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    body {
+        overflow: auto !important;
+        display: block !important;
+    }
+
+    #appSidebar {
+        position: fixed !important;
+        top: 0;
+        left: -300px;
+        height: 100vh;
+        width: 280px !important;
+        transition: left 0.3s ease;
+        z-index: 70 !important;
+    }
+    #appSidebar.open { left: 0; }
+
+    #mainWrapper {
+        height: auto !important;
+        overflow: visible !important;
+        min-height: 100vh;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+        padding: 0.75rem 0.75rem 0.75rem 3.5rem !important;
+    }
+
+    /* Modal full-height */
+    #dataModal > div,
+    #settingsModal > div,
+    #editorLoginModal > div,
+    #resetModal > div,
+    #deleteModal > div {
+        max-width: 100% !important;
+    }
+
+    /* Tombol aksi tabel lebih rapat */
+    .editor-only button {
+        padding: 0.4rem !important;
+    }
+}
+
+/* =========================================
+   HP KECIL (max-width: 480px)
+   ========================================= */
+@media (max-width: 480px) {
+    #authBtnLabel { display: none; }
+    #authBtn { padding: 0.5rem 0.75rem !important; }
+    #authBtn i { font-size: 0.9rem; }
+
+    /* Tabel font lebih kecil lagi */
+    table { font-size: 0.65rem !important; }
+    th, td { padding: 0.35rem 0.25rem !important; }
+}
+
+/* =========================================
+   CSS KHUSUS CETAK
+   ========================================= */
+@media print {
+    body { background: white !important; }
+    aside, header, .no-print, #sidebarOverlay,
+    button[onclick="toggleSidebar()"] { display: none !important; }
+    #mainWrapper {
+        margin: 0 !important; padding: 0 !important;
+        overflow: visible !important; height: auto !important;
+    }
+    main { padding: 0 !important; overflow: visible !important; }
+    .bg-white { border: none !important; box-shadow: none !important; padding: 0 !important; }
+
+    .overflow-x-auto { overflow: visible !important; }
+    table {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        font-size: 8pt !important;
+        table-layout: fixed !important;
+        word-wrap: break-word;
+    }
+    th, td {
+        padding: 4px 2px !important;
+        font-size: 8pt !important;
+        border: 1px solid #cbd5e1 !important;
+    }
+    th { text-align: center !important; }
+    tr { page-break-inside: avoid; page-break-after: auto; }
+
+    .print-page-break {
+        page-break-inside: avoid;
+        page-break-after: always;
+    }
+
+    .relative.h-72, .h-72, .h-64 {
+        height: 250px !important;
+    }
+
+    @page { margin: 1cm; size: landscape; }
+}
+
+/* Sembunyikan elemen jika bukan editor */
+body.readonly .editor-only { display: none !important; }
