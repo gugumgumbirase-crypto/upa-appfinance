@@ -159,9 +159,10 @@ async function handleEditorLogin(e) {
 // STATE & KONFIGURASI
 // ==========================================
 const BULAN_LIST = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-let selectedBulan = "September";
-let selectedTahun = "2026";
-let activeTab = 'iwb'; 
+const NOW_DATE = new Date();
+let selectedBulan = BULAN_LIST[NOW_DATE.getMonth()];
+let selectedTahun = NOW_DATE.getFullYear().toString();
+let activeTab = 'iwb';
 
 let appStore = { iwb: {}, ss: {}, itb: {}, kas: {}, pinjaman: {}, ceklis: {}, bendahara: {} };
 let deleteIndex = -1;
@@ -325,7 +326,7 @@ function switchTab(tab) {
         filterPeriode.classList.add('hidden');
         dataTableArea.classList.add('hidden');
         rekapArea.classList.remove('hidden');
-        document.getElementById('pageTitle').textContent = "8. Rekap & Chart Tahunan";
+        document.getElementById('pageTitle').textContent = "Rekap & Chart Tahunan";
         document.getElementById('rekapTahun').value = selectedTahun;
         renderRekapTahunan();
     } else {
@@ -334,25 +335,25 @@ function switchTab(tab) {
         rekapArea.classList.add('hidden');
 
         if (tab === 'iwb') {
-            document.getElementById('pageTitle').textContent = "1. Rekapan IWB";
+            document.getElementById('pageTitle').textContent = "Rekapan IWB";
             document.getElementById('tableTitle').textContent = "REKAPAN IWB UPA 3216M010";
         } else if (tab === 'ss') {
-            document.getElementById('pageTitle').textContent = "2. Sumbangan Sukarela";
+            document.getElementById('pageTitle').textContent = "Sumbangan Sukarela";
             document.getElementById('tableTitle').textContent = "SUMBANGAN SUKARELA GRUP UPA";
         } else if (tab === 'itb') {
-            document.getElementById('pageTitle').textContent = "3. Rekapan ITB";
+            document.getElementById('pageTitle').textContent = "Rekapan ITB";
             document.getElementById('tableTitle').textContent = "REKAPAN ITB GRUP UPA";
         } else if (tab === 'kas') {
-            document.getElementById('pageTitle').textContent = "4. Kas Grup UPA";
+            document.getElementById('pageTitle').textContent = "Kas Grup UPA";
             document.getElementById('tableTitle').textContent = "BUKU KAS GRUP UPA";
         } else if (tab === 'pinjaman') {
-            document.getElementById('pageTitle').textContent = "5. Pinjaman Anggota";
+            document.getElementById('pageTitle').textContent = "Pinjaman Anggota";
             document.getElementById('tableTitle').textContent = "REKAPAN PINJAMAN ANGGOTA UPA";
         } else if (tab === 'ceklis') {
-            document.getElementById('pageTitle').textContent = "6. Ceklis Iuran UPA";
+            document.getElementById('pageTitle').textContent = "Ceklis Iuran UPA";
             document.getElementById('tableTitle').textContent = "CEKLIS KELENGKAPAN IURAN UPA (OTOMATIS)";
         } else if (tab === 'bendahara') {
-            document.getElementById('pageTitle').textContent = "7. Catatan Bendahara";
+            document.getElementById('pageTitle').textContent = "Catatan Bendahara";
             document.getElementById('tableTitle').textContent = "CATATAN POSISI UANG DI BENDAHARA";
         }
 
@@ -1512,6 +1513,8 @@ function importDataJSON(event) {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     populateYearOptions();
+    const bulanSelect = document.getElementById('globalBulan');
+    if (bulanSelect) bulanSelect.value = selectedBulan;
     loadData();
     updatePeriodLabels();
     applyAuthUI();
