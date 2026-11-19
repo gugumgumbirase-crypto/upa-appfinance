@@ -294,8 +294,8 @@ function switchTab(tab) {
     const activeSnav = document.getElementById(`snav-${tab}`);
     if (activeSnav) activeSnav.classList.add('active');
 
-// Update 4 Item Bottom Bar Mobile (IWB, SS, Pinjaman, Kas)
-    ['iwb', 'ss', 'pinjaman', 'kas'].forEach(t => {
+// Update 4 Item Bottom Bar Mobile (IWB, SS, ITB, Kas)
+    ['iwb', 'ss', 'itb', 'kas'].forEach(t => {
         const bnavEl = document.getElementById(`bnav-${t}`);
         if (!bnavEl) return;
         const ind = bnavEl.querySelector('.bnav-indicator');
@@ -316,7 +316,7 @@ function switchTab(tab) {
     // Sorot tombol bulat tengah jika tab yang aktif berasal dari pop-up
     const centerBtn = document.getElementById('bnav-center-btn');
     if (centerBtn) {
-        const isPopupTab = ['ceklis', 'bendahara', 'rekap', 'itb'].includes(tab);
+        const isPopupTab = ['ceklis', 'bendahara', 'rekap', 'pinjaman'].includes(tab);
         centerBtn.classList.toggle('ring-4', isPopupTab);
         centerBtn.classList.toggle('ring-emerald-200', isPopupTab);
     }

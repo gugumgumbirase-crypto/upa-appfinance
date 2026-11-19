@@ -270,7 +270,7 @@
                 <path d="M 34,0 L 142,0 C 154,0 158,10 163,20 C 170,33 179,38 190,38 C 201,38 210,33 217,20 C 222,10 226,0 238,0 L 346,0 C 364.8,0 380,15.2 380,34 C 380,52.8 364.8,68 346,68 L 34,68 C 15.2,68 0,52.8 0,34 C 0,15.2 15.2,0 34,0 Z" fill="#ffffff"/>
             </svg>
 
-            <!-- 4 Item Navigasi: Kiri (IWB, SS) | Kanan dari Kanan ke Kiri (Kas, Pinjaman) -->
+            <!-- 4 Item Navigasi: Kiri (IWB, SS) | Kanan dari Kanan ke Kiri (Kas, ITB) -->
             <div class="absolute inset-0 grid grid-cols-5 items-center px-2 pointer-events-none z-10">
                 
                 <!-- 1. Paling Kiri: IWB -->
@@ -290,10 +290,10 @@
                 <!-- 3. Spacer Tengah -->
                 <div></div>
 
-                <!-- 4. Sebelah Kiri Kas: Pinjaman -->
-                <button id="bnav-pinjaman" type="button" onclick="switchTab('pinjaman')" class="bnav-item pointer-events-auto flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
-                    <i class="fa-solid fa-hand-holding-dollar text-base"></i>
-                    <span class="text-[11px] font-semibold tracking-tight">Pinjaman</span>
+                <!-- 4. Sebelah Kiri Kas: ITB -->
+                <button id="bnav-itb" type="button" onclick="switchTab('itb')" class="bnav-item pointer-events-auto flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
+                    <i class="fa-solid fa-gem text-base"></i>
+                    <span class="text-[11px] font-semibold tracking-tight">ITB</span>
                     <span class="bnav-indicator w-7 h-[3px] rounded-full bg-transparent mt-0.5"></span>
                 </button>
 
@@ -306,7 +306,7 @@
 
             </div>
 
-            <!-- Tombol Bulat Hijau Tengah (Layer Paling Atas z-30) -->
+            <!-- Tombol Bulat Hijau Tengah -->
             <button id="bnav-center-btn" type="button"
                 onclick="document.getElementById('mobileMenuSheet').classList.toggle('hidden'); document.getElementById('mobileMenuOverlay').classList.toggle('active');"
                 aria-label="Menu Lainnya"
@@ -356,11 +356,11 @@
                     <span>Rekap &amp; Chart</span>
                 </button>
 
-                <button id="snav-itb" type="button" onclick="switchTab('itb')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-gem"></i>
+                <button id="snav-pinjaman" type="button" onclick="switchTab('pinjaman')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
                     </div>
-                    <span>Rekapan ITB</span>
+                    <span>Pinjaman Anggota</span>
                 </button>
             </div>
 
@@ -589,6 +589,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="app.js?v=3"></script>
+    <script src="app.js?v=4"></script>
 </body>
 </html>
