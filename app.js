@@ -1,19 +1,23 @@
 // ==========================================
-// MOBILE BOTTOM SHEET MENU TOGGLE
+// MOBILE POP-UP MENU TOGGLE
 // ==========================================
 function toggleMobileMenuSheet() {
     const sheet = document.getElementById('mobileMenuSheet');
     const overlay = document.getElementById('mobileMenuOverlay');
     if (!sheet) return;
-    const isOpen = sheet.classList.toggle('open');
-    overlay.classList.toggle('active', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    const isHidden = sheet.classList.contains('hidden');
+    if (isHidden) {
+        sheet.classList.remove('hidden');
+        overlay?.classList.add('active');
+    } else {
+        sheet.classList.add('hidden');
+        overlay?.classList.remove('active');
+    }
 }
 
 function closeMobileMenuSheet() {
-    document.getElementById('mobileMenuSheet')?.classList.remove('open');
+    document.getElementById('mobileMenuSheet')?.classList.add('hidden');
     document.getElementById('mobileMenuOverlay')?.classList.remove('active');
-    document.body.style.overflow = '';
 }
 
 window.addEventListener('resize', () => {

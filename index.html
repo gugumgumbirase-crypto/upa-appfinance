@@ -270,15 +270,14 @@
                 <path d="M 34,0 L 142,0 C 154,0 158,10 163,20 C 170,33 179,38 190,38 C 201,38 210,33 217,20 C 222,10 226,0 238,0 L 346,0 C 364.8,0 380,15.2 380,34 C 380,52.8 364.8,68 346,68 L 34,68 C 15.2,68 0,52.8 0,34 C 0,15.2 15.2,0 34,0 Z" fill="#ffffff"/>
             </svg>
 
-            <!-- Tombol Bulat Hijau Tengah (Pop-up Menu) -->
-            <button id="bnav-center-btn" onclick="toggleMobileMenuSheet()" aria-label="Menu Lainnya"
-                class="absolute left-1/2 -translate-x-1/2 -top-5 w-14 h-14 rounded-full bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white shadow-[0_8px_20px_rgba(4,120,87,0.38)] flex items-center justify-center transition z-10">
-                <!-- Ikon 4 Titik / Kotak -->
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                    <circle cx="7.5" cy="7.5" r="2.6"/>
-                    <circle cx="16.5" cy="7.5" r="2.6"/>
-                    <circle cx="7.5" cy="16.5" r="2.6"/>
-                    <circle cx="16.5" cy="16.5" r="2.6" fill-opacity="0.75"/>
+            <!-- Tombol Bulat Hijau Tengah (Ikon 4 Kotak Tetap Seperti Awal) -->
+            <button id="bnav-center-btn" type="button" onclick="toggleMobileMenuSheet()" aria-label="Menu Lainnya"
+                class="absolute left-1/2 -translate-x-1/2 -top-5 w-14 h-14 rounded-full bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white shadow-[0_8px_20px_rgba(4,120,87,0.38)] flex items-center justify-center transition z-20 cursor-pointer">
+                <svg class="w-6 h-6 pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3.5" y="3.5" width="7" height="7" rx="2"/>
+                    <rect x="13.5" y="3.5" width="7" height="7" rx="2"/>
+                    <rect x="3.5" y="13.5" width="7" height="7" rx="2"/>
+                    <rect x="13.5" y="13.5" width="7" height="7" rx="2" fill-opacity="0.75"/>
                 </svg>
             </button>
 
@@ -286,14 +285,14 @@
             <div class="absolute inset-0 grid grid-cols-5 items-center px-2">
                 
                 <!-- 1. Paling Kiri: IWB -->
-                <button id="bnav-iwb" onclick="switchTab('iwb')" class="bnav-item active flex flex-col items-center justify-center gap-0.5 pt-1">
+                <button id="bnav-iwb" type="button" onclick="switchTab('iwb')" class="bnav-item active flex flex-col items-center justify-center gap-0.5 pt-1">
                     <i class="fa-solid fa-table-cells text-base"></i>
                     <span class="text-[11px] font-bold tracking-tight">IWB</span>
                     <span class="bnav-indicator w-7 h-[3px] rounded-full bg-emerald-700 mt-0.5"></span>
                 </button>
 
                 <!-- 2. Sebelah Kanan IWB: SS -->
-                <button id="bnav-ss" onclick="switchTab('ss')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
+                <button id="bnav-ss" type="button" onclick="switchTab('ss')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
                     <i class="fa-solid fa-hand-holding-heart text-base"></i>
                     <span class="text-[11px] font-semibold tracking-tight">SS</span>
                     <span class="bnav-indicator w-7 h-[3px] rounded-full bg-transparent mt-0.5"></span>
@@ -303,14 +302,14 @@
                 <div></div>
 
                 <!-- 4. Sebelah Kiri Kas: Pinjaman -->
-                <button id="bnav-pinjaman" onclick="switchTab('pinjaman')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
+                <button id="bnav-pinjaman" type="button" onclick="switchTab('pinjaman')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
                     <i class="fa-solid fa-hand-holding-dollar text-base"></i>
                     <span class="text-[11px] font-semibold tracking-tight">Pinjaman</span>
                     <span class="bnav-indicator w-7 h-[3px] rounded-full bg-transparent mt-0.5"></span>
                 </button>
 
                 <!-- 5. Paling Kanan: Kas -->
-                <button id="bnav-kas" onclick="switchTab('kas')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
+                <button id="bnav-kas" type="button" onclick="switchTab('kas')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
                     <i class="fa-solid fa-wallet text-base"></i>
                     <span class="text-[11px] font-semibold tracking-tight">Kas</span>
                     <span class="bnav-indicator w-7 h-[3px] rounded-full bg-transparent mt-0.5"></span>
@@ -321,40 +320,40 @@
     </nav>
 
     <!-- ==========================================================
-         POP-UP MENU TENGAH (HP)
+         POP-UP MENU TENGAH (HANYA SATU ELEMEN)
          ========================================================== -->
-    <div id="mobileMenuSheet" class="md:hidden fixed inset-x-4 bottom-24 z-[70] max-w-sm mx-auto bg-white rounded-3xl shadow-2xl border border-slate-200/90 transform translate-y-[140%] opacity-0 pointer-events-none transition-all duration-250 ease-out no-print">
+    <div id="mobileMenuSheet" class="md:hidden fixed inset-x-4 bottom-24 z-[70] max-w-sm mx-auto bg-white rounded-3xl shadow-2xl border border-slate-200/90 hidden no-print">
         <div class="p-4">
             <div class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
                 <span class="text-xs font-extrabold text-slate-800 tracking-tight">Menu Lainnya</span>
-                <button onclick="closeMobileMenuSheet()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs">
+                <button type="button" onclick="closeMobileMenuSheet()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <div class="space-y-2 text-xs">
-                <button id="snav-ceklis" onclick="switchTab('ceklis')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                <button id="snav-ceklis" type="button" onclick="switchTab('ceklis')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
                     <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
                         <i class="fa-solid fa-list-check"></i>
                     </div>
                     <span>Ceklis Iuran Upa</span>
                 </button>
 
-                <button id="snav-bendahara" onclick="switchTab('bendahara')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                <button id="snav-bendahara" type="button" onclick="switchTab('bendahara')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
                     <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
                         <i class="fa-solid fa-book-bookmark"></i>
                     </div>
                     <span>Catatan Bendahara</span>
                 </button>
 
-                <button id="snav-rekap" onclick="switchTab('rekap')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                <button id="snav-rekap" type="button" onclick="switchTab('rekap')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
                     <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <span>Rekap &amp; Chart</span>
                 </button>
 
-                <button id="snav-itb" onclick="switchTab('itb')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                <button id="snav-itb" type="button" onclick="switchTab('itb')" class="snav-item w-full flex items-center gap-3 p-3 rounded-2xl border border-slate-200/80 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
                     <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
                         <i class="fa-solid fa-gem"></i>
                     </div>
@@ -364,96 +363,9 @@
 
             <!-- Pengaturan Data (Khusus Editor) -->
             <div class="mt-2.5 pt-2.5 border-t border-slate-100 editor-only">
-                <button onclick="closeMobileMenuSheet(); openSettingsModal();" class="w-full py-2.5 px-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-2 transition">
+                <button type="button" onclick="closeMobileMenuSheet(); openSettingsModal();" class="w-full py-2.5 px-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-2 transition">
                     <i class="fa-solid fa-gear text-emerald-700"></i>
                     <span>Pengaturan Data</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==========================================================
-         BOTTOM SHEET DRAWER: SEMUA MENU KEUANGAN (HP)
-         ========================================================== -->
-    <div id="mobileMenuSheet" class="md:hidden fixed inset-x-0 bottom-0 z-[70] bg-white rounded-t-3xl shadow-2xl border-t border-slate-200 transform translate-y-full transition-transform duration-300 ease-out no-print">
-        <div class="p-4 pb-6 max-h-[82vh] overflow-y-auto">
-            <!-- Handle Bar -->
-            <div class="w-10 h-1 bg-slate-300 rounded-full mx-auto mb-3"></div>
-            
-            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
-                <div>
-                    <h3 class="text-sm font-extrabold text-slate-900">Menu Keuangan UPA</h3>
-                    <p class="text-[11px] text-slate-500">Pilih laporan atau catatan yang ingin dibuka</p>
-                </div>
-                <button onclick="closeMobileMenuSheet()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Grid 8 Menu dengan Tulisan & Judul Persis Seperti Sebelumnya -->
-            <div class="grid grid-cols-2 gap-2.5 text-xs">
-                <button id="snav-iwb" onclick="switchTab('iwb')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-table-cells"></i>
-                    </div>
-                    <span class="leading-tight">Rekapan IWB</span>
-                </button>
-
-                <button id="snav-ss" onclick="switchTab('ss')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-hand-holding-heart"></i>
-                    </div>
-                    <span class="leading-tight">Sumbangan Sukarela</span>
-                </button>
-
-                <button id="snav-itb" onclick="switchTab('itb')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-gem"></i>
-                    </div>
-                    <span class="leading-tight">Rekapan ITB</span>
-                </button>
-
-                <button id="snav-kas" onclick="switchTab('kas')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
-                    <span class="leading-tight">Kas Grup UPA</span>
-                </button>
-
-                <button id="snav-pinjaman" onclick="switchTab('pinjaman')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>
-                    </div>
-                    <span class="leading-tight">Pinjaman Anggota</span>
-                </button>
-
-                <button id="snav-ceklis" onclick="switchTab('ceklis')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-list-check"></i>
-                    </div>
-                    <span class="leading-tight">Ceklis Iuran UPA</span>
-                </button>
-
-                <button id="snav-bendahara" onclick="switchTab('bendahara')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-book-bookmark"></i>
-                    </div>
-                    <span class="leading-tight">Catatan Bendahara</span>
-                </button>
-
-                <button id="snav-rekap" onclick="switchTab('rekap')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-chart-line"></i>
-                    </div>
-                    <span class="leading-tight">Rekap & Chart</span>
-                </button>
-            </div>
-
-            <!-- Tombol Pengaturan Data (Khusus Editor) -->
-            <div class="mt-3 pt-3 border-t border-slate-100 editor-only">
-                <button onclick="closeMobileMenuSheet(); openSettingsModal();" class="w-full py-3 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-2 transition">
-                    <i class="fa-solid fa-gear text-emerald-700"></i>
-                    <span>Pengaturan Data (Backup / Restore)</span>
                 </button>
             </div>
         </div>
