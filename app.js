@@ -68,21 +68,37 @@ function applyAuthUI() {
     if (badge) {
         badge.textContent = editor ? 'Editor' : 'Mode Lihat';
         badge.className = editor
-            ? 'bg-emerald-100 text-emerald-700 border border-emerald-300 text-[10px] font-black px-2 py-0.5 rounded-full uppercase'
-            : 'bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-black px-2 py-0.5 rounded-full uppercase';
+            ? 'bg-emerald-100 text-emerald-700 border border-emerald-300 text-[9px] font-black px-2 py-0.5 rounded-full uppercase'
+            : 'bg-slate-100 text-slate-600 border border-slate-200 text-[9px] font-black px-2 py-0.5 rounded-full uppercase';
     }
 
+    // Tombol Desktop
     const btn = document.getElementById('authBtn');
     const label = document.getElementById('authBtnLabel');
     if (btn && label) {
         if (editor) {
             label.textContent = 'Logout';
-            btn.className = 'bg-slate-700 hover:bg-slate-900 text-white text-xs px-4 py-2 rounded-lg font-bold transition flex items-center gap-1.5 shadow-md';
+            btn.className = 'hidden md:flex bg-slate-700 hover:bg-slate-900 text-white text-xs px-4 py-2 rounded-xl font-bold transition items-center gap-1.5 shadow-sm shrink-0';
             const ic = btn.querySelector('i'); if (ic) ic.className = 'fa-solid fa-right-from-bracket';
         } else {
             label.textContent = 'Login Editor';
-            btn.className = 'bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-2 rounded-lg font-bold transition flex items-center gap-1.5 shadow-sm';
+            btn.className = 'hidden md:flex bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-2 rounded-xl font-bold transition items-center gap-1.5 shadow-sm shrink-0';
             const ic = btn.querySelector('i'); if (ic) ic.className = 'fa-solid fa-right-to-bracket';
+        }
+    }
+
+    // Tombol Mobile (HP)
+    const btnM = document.getElementById('authBtnMobile');
+    const labelM = document.getElementById('authBtnLabelMobile');
+    if (btnM && labelM) {
+        if (editor) {
+            labelM.textContent = 'Keluar';
+            btnM.className = 'md:hidden bg-slate-700 hover:bg-slate-900 active:scale-95 text-white text-xs px-3 h-9 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm shrink-0';
+            const ic = btnM.querySelector('i'); if (ic) ic.className = 'fa-solid fa-right-from-bracket';
+        } else {
+            labelM.textContent = 'Masuk';
+            btnM.className = 'md:hidden bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs px-3 h-9 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm shrink-0';
+            const ic = btnM.querySelector('i'); if (ic) ic.className = 'fa-solid fa-right-to-bracket';
         }
     }
 }

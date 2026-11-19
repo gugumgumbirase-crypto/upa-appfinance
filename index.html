@@ -17,12 +17,6 @@
     <!-- Overlay sidebar (HP) -->
     <div id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- Tombol Hamburger (HP only) -->
-    <button onclick="toggleSidebar()" aria-label="Buka menu"
-        class="md:hidden fixed top-3 left-3 z-[70] bg-emerald-700 hover:bg-emerald-800 text-white p-2.5 rounded-lg shadow-lg transition">
-        <i class="fa-solid fa-bars text-lg"></i>
-    </button>
-
     <!-- Toast -->
     <div id="toastContainer" class="fixed top-5 right-5 z-[80] space-y-2 pointer-events-none no-print"></div>
 
@@ -39,7 +33,7 @@
                         <p class="text-[10px] text-emerald-200 font-semibold tracking-wide uppercase">Financial Pro</p>
                     </div>
                 </div>
-                <button onclick="toggleSidebar()" aria-label="Tutup menu" class="md:hidden text-emerald-200 hover:text-white p-1">
+                <button onclick="toggleSidebar()" aria-label="Tutup menu" class="md:hidden text-emerald-200 hover:text-white p-1.5 rounded-lg hover:bg-emerald-700/60 transition">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
@@ -93,71 +87,97 @@
     <!-- KONTEN UTAMA -->
     <div id="mainWrapper" class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
 
-        <!-- HEADER -->
-        <header class="bg-white border-b border-slate-200 sticky top-0 z-20 px-4 md:px-6 pl-14 md:pl-6 py-3 flex items-center justify-between gap-3 shadow-sm flex-wrap">
-            <div class="min-w-0">
-                <div class="flex items-center gap-2 flex-wrap">
-                    <h2 id="pageTitle" class="text-base md:text-lg font-bold text-slate-900 tracking-tight truncate">1. Rekapan IWB</h2>
-                    <span id="activeYearBadge" class="bg-emerald-100 text-emerald-700 border border-emerald-200 text-[10px] md:text-[11px] font-bold px-2 py-0.5 rounded-full">TH 2026</span>
-                    <span id="modeBadge" class="bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Mode Lihat</span>
-                </div>
-                <p class="text-xs text-slate-500 font-medium hidden sm:block">Sistem Informasi & Laporan Keuangan UPA</p>
-            </div>
+        <!-- HEADER MODERN RESPONSIF -->
+        <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-20 px-3.5 md:px-6 py-2.5 md:py-3 shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
+                
+                <!-- Baris 1: Tombol Menu (HP) + Judul & Status + Tombol Auth (HP) -->
+                <div class="flex items-center justify-between gap-2 min-w-0">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <!-- Tombol Hamburger sejajar di dalam header -->
+                        <button onclick="toggleSidebar()" aria-label="Buka menu"
+                            class="md:hidden w-9 h-9 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white flex items-center justify-center shadow-sm transition shrink-0">
+                            <i class="fa-solid fa-bars text-sm"></i>
+                        </button>
 
-            <div class="flex items-center gap-2 md:gap-3 flex-wrap w-full md:w-auto justify-end">
-                <!-- Filter Bulan & Tahun -->
-                <div id="filter-periode" class="flex items-center bg-slate-100 border border-slate-200 rounded-lg p-1 text-xs shadow-inner w-full sm:w-auto justify-between sm:justify-start">
-                    <button onclick="navigatePeriod(-1)" class="p-1.5 hover:bg-white text-slate-700 hover:text-emerald-600 rounded transition" aria-label="Bulan sebelumnya">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <div class="flex items-center gap-1 px-1 flex-1 justify-center">
-                        <i class="fa-regular fa-calendar-days text-emerald-600 ml-1 hidden sm:inline"></i>
-                        <select id="globalBulan" onchange="onPeriodChange()" class="bg-transparent text-slate-900 font-bold py-1 px-1 focus:outline-none cursor-pointer text-xs">
-                            <option>Januari</option><option>Februari</option><option>Maret</option>
-                            <option>April</option><option>Mei</option><option>Juni</option>
-                            <option>Juli</option><option>Agustus</option>
-                            <option selected>September</option><option>Oktober</option>
-                            <option>November</option><option>Desember</option>
-                        </select>
-                        <select id="globalTahun" onchange="onPeriodChange()" class="bg-white text-emerald-700 font-black py-1 px-2 rounded focus:outline-none cursor-pointer border border-slate-200 shadow-sm text-xs">
-                        </select>
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1.5">
+                                <h2 id="pageTitle" class="text-sm sm:text-base md:text-lg font-extrabold text-slate-900 tracking-tight truncate">1. Rekapan IWB</h2>
+                                <span id="activeYearBadge" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0">TH 2026</span>
+                            </div>
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <span id="modeBadge" class="bg-slate-100 text-slate-600 border border-slate-200 text-[9px] font-black px-2 py-0.2 rounded-full uppercase">Mode Lihat</span>
+                                <span class="text-[11px] text-slate-400 font-medium hidden sm:inline truncate">Sistem Informasi & Laporan Keuangan UPA</span>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="navigatePeriod(1)" class="p-1.5 hover:bg-white text-slate-700 hover:text-emerald-600 rounded transition" aria-label="Bulan berikutnya">
-                        <i class="fa-solid fa-chevron-right"></i>
+
+                    <!-- Tombol Login/Logout versi HP (sejajar baris 1) -->
+                    <button id="authBtnMobile" onclick="onAuthButtonClick()" class="md:hidden bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs px-3 h-9 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm shrink-0">
+                        <i class="fa-solid fa-right-to-bracket"></i> <span id="authBtnLabelMobile">Masuk</span>
                     </button>
                 </div>
 
-                <button id="authBtn" onclick="onAuthButtonClick()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 md:px-4 py-2 rounded-lg font-bold transition flex items-center gap-1.5 shadow-sm shrink-0">
-                    <i class="fa-solid fa-right-to-bracket"></i> <span id="authBtnLabel">Login Editor</span>
-                </button>
+                <!-- Baris 2 (HP) / Kanan (Desktop): Filter Periode + Tombol Auth Desktop -->
+                <div class="flex items-center gap-2.5 justify-between md:justify-end">
+                    <!-- Filter Bulan & Tahun Kapsul Modern -->
+                    <div id="filter-periode" class="flex items-center bg-slate-100/90 border border-slate-200/80 rounded-xl p-1 text-xs w-full md:w-auto justify-between">
+                        <button onclick="navigatePeriod(-1)" class="w-7 h-7 flex items-center justify-center hover:bg-white text-slate-600 hover:text-emerald-700 rounded-lg transition active:scale-95" aria-label="Bulan sebelumnya">
+                            <i class="fa-solid fa-chevron-left text-[11px]"></i>
+                        </button>
+                        <div class="flex items-center gap-1.5 px-2 flex-1 justify-center">
+                            <i class="fa-regular fa-calendar-days text-emerald-600 text-xs"></i>
+                            <select id="globalBulan" onchange="onPeriodChange()" class="bg-transparent text-slate-800 font-bold py-0.5 px-1 focus:outline-none cursor-pointer text-xs">
+                                <option>Januari</option><option>Februari</option><option>Maret</option>
+                                <option>April</option><option>Mei</option><option>Juni</option>
+                                <option>Juli</option><option>Agustus</option>
+                                <option selected>September</option><option>Oktober</option>
+                                <option>November</option><option>Desember</option>
+                            </select>
+                            <span class="text-slate-300">|</span>
+                            <select id="globalTahun" onchange="onPeriodChange()" class="bg-white text-emerald-700 font-extrabold py-0.5 px-2 rounded-lg focus:outline-none cursor-pointer border border-slate-200/80 shadow-2xs text-xs">
+                            </select>
+                        </div>
+                        <button onclick="navigatePeriod(1)" class="w-7 h-7 flex items-center justify-center hover:bg-white text-slate-600 hover:text-emerald-700 rounded-lg transition active:scale-95" aria-label="Bulan berikutnya">
+                            <i class="fa-solid fa-chevron-right text-[11px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Tombol Login/Logout versi Desktop -->
+                    <button id="authBtn" onclick="onAuthButtonClick()" class="hidden md:flex bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-2 rounded-xl font-bold transition items-center gap-1.5 shadow-sm shrink-0">
+                        <i class="fa-solid fa-right-to-bracket"></i> <span id="authBtnLabel">Login Editor</span>
+                    </button>
+                </div>
+
             </div>
         </header>
 
         <!-- AREA KONTEN -->
         <main class="p-3 md:p-6 space-y-4 md:space-y-6 flex-1">
 
-            <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-3 md:p-5 space-y-4">
+            <div class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-3.5 md:p-5 space-y-4">
 
                 <!-- AREA TABEL DATA -->
                 <div id="data-table-area">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-200 pb-3 mb-4">
-                        <div>
-                            <h2 id="tableTitle" class="text-sm md:text-base font-bold text-slate-900">REKAPAN IWB UPA 3216M010</h2>
-                            <p class="text-xs text-slate-500 font-semibold">Periode: <span id="period-display" class="text-emerald-600 font-bold">September 2026</span></p>
+                    <!-- Header Card Sejajar (Judul kiri, Tombol Print/Tambah kanan) -->
+                    <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3.5">
+                        <div class="min-w-0">
+                            <h2 id="tableTitle" class="text-xs sm:text-sm md:text-base font-extrabold text-slate-900 tracking-tight truncate">REKAPAN IWB UPA 3216M010</h2>
+                            <p class="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">Periode: <span id="period-display" class="text-emerald-600 font-bold">September 2026</span></p>
                         </div>
-                        <div class="flex items-center gap-2 no-print">
-                            <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 md:px-4 py-2 rounded-lg font-bold transition flex items-center gap-1.5 shadow-sm">
+                        <div class="flex items-center gap-1.5 sm:gap-2 no-print shrink-0">
+                            <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs px-3 py-2 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm">
                                 <i class="fa-solid fa-print"></i> <span class="hidden sm:inline">Cetak</span>
                             </button>
-                            <button onclick="openAddModal()" id="btnTambah" class="editor-only bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs px-3 md:px-4 py-2 rounded-lg font-bold transition flex items-center gap-1.5">
+                            <button onclick="openAddModal()" id="btnTambah" class="editor-only bg-emerald-50 hover:bg-emerald-100 active:scale-95 text-emerald-700 border border-emerald-200 text-xs px-3 py-2 rounded-xl font-bold transition flex items-center gap-1.5">
                                 <i class="fa-solid fa-plus-circle"></i> <span class="hidden sm:inline">Tambah Data</span><span class="sm:hidden">Tambah</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Tabel Data: scroll horizontal di HP -->
-                    <div class="overflow-x-auto -mx-3 md:mx-0 px-3 md:px-0 pb-2">
-                        <table class="w-full min-w-[680px] text-xs text-left text-slate-800 table-fixed table-rounded">
+                    <!-- Tabel Data: scroll horizontal halus di HP -->
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full min-w-[680px] text-xs text-left text-slate-800 table-fixed table-rounded border-0">
                             <thead id="tableHead" class="text-xs uppercase bg-emerald-600 text-white font-bold text-center"></thead>
                             <tbody id="tableBody" class="divide-y divide-slate-200 bg-white font-medium"></tbody>
                             <tfoot id="tableFoot" class="bg-emerald-50 text-emerald-800 font-bold border-t border-emerald-200"></tfoot>
@@ -173,8 +193,8 @@
                             <p class="text-xs text-slate-500">Konsolidasi Data Iuran, Kas, dan Analisis Tren Bulanan</p>
                         </div>
                         <div class="flex flex-wrap items-center gap-2">
-                            <select id="rekapTahun" onchange="onRekapYearChange()" class="bg-white text-emerald-700 font-bold py-1.5 px-3 rounded-lg border border-emerald-200 shadow-sm text-xs focus:outline-none"></select>
-                            <button onclick="window.print()" class="bg-white hover:bg-slate-50 text-emerald-600 border border-slate-200 text-xs px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1.5 shadow-sm">
+                            <select id="rekapTahun" onchange="onRekapYearChange()" class="bg-white text-emerald-700 font-bold py-1.5 px-3 rounded-xl border border-emerald-200 shadow-sm text-xs focus:outline-none"></select>
+                            <button onclick="window.print()" class="bg-white hover:bg-slate-50 text-emerald-600 border border-slate-200 text-xs px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm">
                                 <i class="fa-solid fa-print"></i> Cetak
                             </button>
                         </div>
@@ -204,8 +224,8 @@
                             </div>
                             <span class="text-[10px] bg-orange-50 text-[#EE4D2D] font-black px-2.5 py-1 rounded-md border border-orange-200">Grup UPA 3216M010</span>
                         </div>
-                        <div class="overflow-x-auto rounded-xl border border-slate-200 -mx-3 md:mx-0 px-3 md:px-0">
-                            <table class="w-full min-w-[560px] text-xs text-left text-slate-800 border-collapse table-rounded">
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full min-w-[560px] text-xs text-left text-slate-800 border-collapse table-rounded border-0">
                                 <thead class="text-xs uppercase bg-emerald-600 text-white font-extrabold"><tr>
                                     <th class="px-4 py-3 border-r border-emerald-500/50">Bulan</th>
                                     <th class="px-3 py-3 text-right border-r border-emerald-500/50">IWB</th>
@@ -227,8 +247,8 @@
                                 </div>
                                 <span class="text-[10px] bg-rose-50 text-rose-600 font-black px-2.5 py-1 rounded-md border border-rose-200">Total Piutang Aktif</span>
                             </div>
-                            <div class="overflow-x-auto rounded-xl border border-slate-200 -mx-3 md:mx-0 px-3 md:px-0">
-                                <table class="w-full min-w-[600px] text-xs text-left text-slate-800 border-collapse table-rounded">
+                            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                                <table class="w-full min-w-[600px] text-xs text-left text-slate-800 border-collapse table-rounded border-0">
                                     <thead class="text-xs uppercase bg-rose-600 text-white font-extrabold">
                                         <tr>
                                             <th class="px-4 py-3 border-r border-rose-500/50 w-[5%]">No</th>
