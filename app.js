@@ -314,12 +314,6 @@ function switchTab(tab) {
     });
 
     // Sorot tombol bulat tengah jika tab yang aktif berasal dari pop-up
-    const centerBtn = document.getElementById('bnav-center-btn');
-    if (centerBtn) {
-        const isPopupTab = ['ceklis', 'bendahara', 'rekap', 'pinjaman'].includes(tab);
-        centerBtn.classList.toggle('ring-4', isPopupTab);
-        centerBtn.classList.toggle('ring-emerald-200', isPopupTab);
-    }
 
     closeMobileMenuSheet();
 
