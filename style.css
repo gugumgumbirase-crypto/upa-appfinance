@@ -31,6 +31,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 
 #mobileMenuSheet.open {
     transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 /* Status Aktif Bottom Navigation Bar */

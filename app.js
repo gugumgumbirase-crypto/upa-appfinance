@@ -290,8 +290,8 @@ function switchTab(tab) {
     const activeSnav = document.getElementById(`snav-${tab}`);
     if (activeSnav) activeSnav.classList.add('active');
 
-    // Update 4 Item Bottom Bar Mobile
-    ['iwb', 'kas', 'pinjaman', 'rekap'].forEach(t => {
+// Update 4 Item Bottom Bar Mobile (IWB, SS, Pinjaman, Kas)
+    ['iwb', 'ss', 'pinjaman', 'kas'].forEach(t => {
         const bnavEl = document.getElementById(`bnav-${t}`);
         if (!bnavEl) return;
         const ind = bnavEl.querySelector('.bnav-indicator');
@@ -308,6 +308,14 @@ function switchTab(tab) {
             if (ind) { ind.classList.remove('bg-emerald-700'); ind.classList.add('bg-transparent'); }
         }
     });
+
+    // Sorot tombol bulat tengah jika tab yang aktif berasal dari pop-up
+    const centerBtn = document.getElementById('bnav-center-btn');
+    if (centerBtn) {
+        const isPopupTab = ['ceklis', 'bendahara', 'rekap', 'itb'].includes(tab);
+        centerBtn.classList.toggle('ring-4', isPopupTab);
+        centerBtn.classList.toggle('ring-emerald-200', isPopupTab);
+    }
 
     closeMobileMenuSheet();
 
