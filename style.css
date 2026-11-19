@@ -17,9 +17,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
 }
 
 /* =========================================
-   SIDEBAR OVERLAY (HP)
+   OVERLAY & BOTTOM SHEET MENU (HP)
    ========================================= */
-#sidebarOverlay {
+#mobileMenuOverlay {
     display: none;
     position: fixed;
     inset: 0;
@@ -27,7 +27,29 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
     backdrop-filter: blur(3px);
     z-index: 65;
 }
-#sidebarOverlay.active { display: block; }
+#mobileMenuOverlay.active { display: block; }
+
+#mobileMenuSheet.open {
+    transform: translateY(0) !important;
+}
+
+/* Status Aktif Bottom Navigation Bar */
+.bnav-item.active {
+    color: #047857; /* emerald-700 */
+}
+.bnav-item.active span:first-of-type {
+    font-weight: 800;
+}
+.bnav-item.active .bnav-indicator {
+    background-color: #047857;
+}
+
+/* Status Aktif Menu di Bottom Sheet */
+.snav-item.active {
+    background-color: #ecfdf5; /* emerald-50 */
+    border-color: #10b981; /* emerald-500 */
+    color: #065f46; /* emerald-800 */
+}
 
 /* =========================================
    MOBILE FRIENDLY (max-width: 768px)
@@ -37,17 +59,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
         overflow: auto !important;
         display: block !important;
     }
-
-    #appSidebar {
-        position: fixed !important;
-        top: 0;
-        left: -300px;
-        height: 100vh;
-        width: 280px !important;
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 70 !important;
-    }
-    #appSidebar.open { left: 0; }
 
     #mainWrapper {
         height: auto !important;
@@ -64,7 +75,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
         max-width: 100% !important;
     }
 
-    /* Tombol aksi tabel lebih rapat */
     .editor-only button {
         padding: 0.4rem !important;
     }
@@ -83,10 +93,10 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; }
    ========================================= */
 @media print {
     body { background: white !important; }
-    aside, header, .no-print, #sidebarOverlay,
-    button[onclick="toggleSidebar()"] { display: none !important; }
+    aside, header, nav, .no-print, #mobileMenuOverlay, #mobileMenuSheet { display: none !important; }
     #mainWrapper {
         margin: 0 !important; padding: 0 !important;
+        padding-bottom: 0 !important;
         overflow: visible !important; height: auto !important;
     }
     main { padding: 0 !important; overflow: visible !important; }

@@ -1,24 +1,24 @@
 // ==========================================
-// MOBILE SIDEBAR TOGGLE
+// MOBILE BOTTOM SHEET MENU TOGGLE
 // ==========================================
-function toggleSidebar() {
-    const sidebar = document.getElementById('appSidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    if (!sidebar) return;
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('active');
-    if (sidebar.classList.contains('open')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
+function toggleMobileMenuSheet() {
+    const sheet = document.getElementById('mobileMenuSheet');
+    const overlay = document.getElementById('mobileMenuOverlay');
+    if (!sheet) return;
+    const isOpen = sheet.classList.toggle('open');
+    overlay.classList.toggle('active', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function closeMobileMenuSheet() {
+    document.getElementById('mobileMenuSheet')?.classList.remove('open');
+    document.getElementById('mobileMenuOverlay')?.classList.remove('active');
+    document.body.style.overflow = '';
 }
 
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
-        document.getElementById('appSidebar')?.classList.remove('open');
-        document.getElementById('sidebarOverlay')?.classList.remove('active');
-        document.body.style.overflow = '';
+        closeMobileMenuSheet();
     }
 });
 
@@ -72,7 +72,6 @@ function applyAuthUI() {
             : 'bg-slate-100 text-slate-600 border border-slate-200 text-[9px] font-black px-2 py-0.5 rounded-full uppercase';
     }
 
-    // Tombol Desktop
     const btn = document.getElementById('authBtn');
     const label = document.getElementById('authBtnLabel');
     if (btn && label) {
@@ -87,7 +86,6 @@ function applyAuthUI() {
         }
     }
 
-    // Tombol Mobile (HP)
     const btnM = document.getElementById('authBtnMobile');
     const labelM = document.getElementById('authBtnLabelMobile');
     if (btnM && labelM) {
@@ -276,16 +274,42 @@ function handleStatusPinjamanChange(status) {
 function switchTab(tab) {
     activeTab = tab;
 
+    // Update Sidebar Desktop
     ['iwb', 'ss', 'itb', 'kas', 'pinjaman', 'ceklis', 'bendahara', 'rekap'].forEach(t => {
-        document.getElementById(`nav-${t}`).className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 text-emerald-100 hover:bg-emerald-700/50 font-bold";
+        const navEl = document.getElementById(`nav-${t}`);
+        if (navEl) navEl.className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 text-emerald-100 hover:bg-emerald-700/50 font-bold";
+        
+        // Update Bottom Sheet Mobile
+        const snavEl = document.getElementById(`snav-${t}`);
+        if (snavEl) snavEl.classList.remove('active');
     });
-    document.getElementById(`nav-${tab}`).className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 bg-white text-emerald-800 shadow-sm font-bold";
 
-    if (window.innerWidth <= 768) {
-        document.getElementById('appSidebar')?.classList.remove('open');
-        document.getElementById('sidebarOverlay')?.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+    const activeNav = document.getElementById(`nav-${tab}`);
+    if (activeNav) activeNav.className = "w-full py-3 px-3.5 rounded-lg transition flex items-center gap-3 bg-white text-emerald-800 shadow-sm font-bold";
+
+    const activeSnav = document.getElementById(`snav-${tab}`);
+    if (activeSnav) activeSnav.classList.add('active');
+
+    // Update 4 Item Bottom Bar Mobile
+    ['iwb', 'kas', 'pinjaman', 'rekap'].forEach(t => {
+        const bnavEl = document.getElementById(`bnav-${t}`);
+        if (!bnavEl) return;
+        const ind = bnavEl.querySelector('.bnav-indicator');
+        const txt = bnavEl.querySelector('span');
+        if (t === tab) {
+            bnavEl.classList.add('active');
+            bnavEl.classList.remove('text-slate-500');
+            if (txt) { txt.classList.add('font-bold'); txt.classList.remove('font-semibold'); }
+            if (ind) { ind.classList.add('bg-emerald-700'); ind.classList.remove('bg-transparent'); }
+        } else {
+            bnavEl.classList.remove('active');
+            bnavEl.classList.add('text-slate-500');
+            if (txt) { txt.classList.remove('font-bold'); txt.classList.add('font-semibold'); }
+            if (ind) { ind.classList.remove('bg-emerald-700'); ind.classList.add('bg-transparent'); }
+        }
+    });
+
+    closeMobileMenuSheet();
 
     const filterPeriode = document.getElementById('filter-periode');
     const dataTableArea = document.getElementById('data-table-area');

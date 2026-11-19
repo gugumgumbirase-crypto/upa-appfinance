@@ -14,28 +14,23 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex overflow-hidden">
 
-    <!-- Overlay sidebar (HP) -->
-    <div id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    <!-- Overlay Menu Bottom Sheet (HP) -->
+    <div id="mobileMenuOverlay" onclick="closeMobileMenuSheet()"></div>
 
     <!-- Toast -->
     <div id="toastContainer" class="fixed top-5 right-5 z-[80] space-y-2 pointer-events-none no-print"></div>
 
-    <!-- SIDEBAR -->
-    <aside id="appSidebar" class="w-64 bg-emerald-800 text-white flex flex-col justify-between shrink-0 h-screen shadow-xl z-30">
+    <!-- SIDEBAR (KHUSUS DESKTOP / TABLET BESAR) -->
+    <aside id="appSidebar" class="hidden md:flex w-64 bg-emerald-800 text-white flex-col justify-between shrink-0 h-screen shadow-xl z-30">
         <div class="flex-1 min-h-0 flex flex-col">
-            <div class="p-5 flex items-center justify-between border-b border-emerald-700/50 shrink-0">
-                <div class="flex items-center space-x-3">
-                    <div class="bg-white text-emerald-700 p-2.5 rounded-xl font-black text-xl shadow-md flex items-center justify-center w-11 h-11">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-base font-bold tracking-tight text-white">UPA 3216M010</h1>
-                        <p class="text-[10px] text-emerald-200 font-semibold tracking-wide uppercase">Financial Pro</p>
-                    </div>
+            <div class="p-5 flex items-center space-x-3 border-b border-emerald-700/50 shrink-0">
+                <div class="bg-white text-emerald-700 p-2.5 rounded-xl font-black text-xl shadow-md flex items-center justify-center w-11 h-11">
+                    <i class="fa-solid fa-leaf"></i>
                 </div>
-                <button onclick="toggleSidebar()" aria-label="Tutup menu" class="md:hidden text-emerald-200 hover:text-white p-1.5 rounded-lg hover:bg-emerald-700/60 transition">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
+                <div>
+                    <h1 class="text-base font-bold tracking-tight text-white">UPA 3216M010</h1>
+                    <p class="text-[10px] text-emerald-200 font-semibold tracking-wide uppercase">Financial Pro</p>
+                </div>
             </div>
 
             <nav class="p-3 space-y-1.5 text-xs font-semibold flex-1 overflow-y-auto">
@@ -85,20 +80,18 @@
     </aside>
 
     <!-- KONTEN UTAMA -->
-    <div id="mainWrapper" class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
+    <div id="mainWrapper" class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto pb-28 md:pb-0">
 
         <!-- HEADER MODERN RESPONSIF -->
         <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-20 px-3.5 md:px-6 py-2.5 md:py-3 shadow-sm">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
                 
-                <!-- Baris 1: Tombol Menu (HP) + Judul & Status + Tombol Auth (HP) -->
+                <!-- Baris 1: Logo Mini (HP) + Judul & Status + Tombol Auth (HP) -->
                 <div class="flex items-center justify-between gap-2 min-w-0">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <!-- Tombol Hamburger sejajar di dalam header -->
-                        <button onclick="toggleSidebar()" aria-label="Buka menu"
-                            class="md:hidden w-9 h-9 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white flex items-center justify-center shadow-sm transition shrink-0">
-                            <i class="fa-solid fa-bars text-sm"></i>
-                        </button>
+                        <div class="md:hidden w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-leaf text-base"></i>
+                        </div>
 
                         <div class="min-w-0">
                             <div class="flex items-center gap-1.5">
@@ -107,12 +100,12 @@
                             </div>
                             <div class="flex items-center gap-2 mt-0.5">
                                 <span id="modeBadge" class="bg-slate-100 text-slate-600 border border-slate-200 text-[9px] font-black px-2 py-0.2 rounded-full uppercase">Mode Lihat</span>
-                                <span class="text-[11px] text-slate-400 font-medium hidden sm:inline truncate">Sistem Informasi & Laporan Keuangan UPA</span>
+                                <span class="text-[11px] text-slate-400 font-medium truncate">UPA 3216M010</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tombol Login/Logout versi HP (sejajar baris 1) -->
+                    <!-- Tombol Login/Logout versi HP -->
                     <button id="authBtnMobile" onclick="onAuthButtonClick()" class="md:hidden bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs px-3 h-9 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm shrink-0">
                         <i class="fa-solid fa-right-to-bracket"></i> <span id="authBtnLabelMobile">Masuk</span>
                     </button>
@@ -120,7 +113,6 @@
 
                 <!-- Baris 2 (HP) / Kanan (Desktop): Filter Periode + Tombol Auth Desktop -->
                 <div class="flex items-center gap-2.5 justify-between md:justify-end">
-                    <!-- Filter Bulan & Tahun Kapsul Modern -->
                     <div id="filter-periode" class="flex items-center bg-slate-100/90 border border-slate-200/80 rounded-xl p-1 text-xs w-full md:w-auto justify-between">
                         <button onclick="navigatePeriod(-1)" class="w-7 h-7 flex items-center justify-center hover:bg-white text-slate-600 hover:text-emerald-700 rounded-lg transition active:scale-95" aria-label="Bulan sebelumnya">
                             <i class="fa-solid fa-chevron-left text-[11px]"></i>
@@ -143,7 +135,6 @@
                         </button>
                     </div>
 
-                    <!-- Tombol Login/Logout versi Desktop -->
                     <button id="authBtn" onclick="onAuthButtonClick()" class="hidden md:flex bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-2 rounded-xl font-bold transition items-center gap-1.5 shadow-sm shrink-0">
                         <i class="fa-solid fa-right-to-bracket"></i> <span id="authBtnLabel">Login Editor</span>
                     </button>
@@ -159,7 +150,6 @@
 
                 <!-- AREA TABEL DATA -->
                 <div id="data-table-area">
-                    <!-- Header Card Sejajar (Judul kiri, Tombol Print/Tambah kanan) -->
                     <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3.5">
                         <div class="min-w-0">
                             <h2 id="tableTitle" class="text-xs sm:text-sm md:text-base font-extrabold text-slate-900 tracking-tight truncate">REKAPAN IWB UPA 3216M010</h2>
@@ -175,7 +165,6 @@
                         </div>
                     </div>
 
-                    <!-- Tabel Data: scroll horizontal halus di HP -->
                     <div class="overflow-x-auto rounded-xl border border-slate-200">
                         <table class="w-full min-w-[680px] text-xs text-left text-slate-800 table-fixed table-rounded border-0">
                             <thead id="tableHead" class="text-xs uppercase bg-emerald-600 text-white font-bold text-center"></thead>
@@ -268,6 +257,152 @@
 
             </div>
         </main>
+    </div>
+
+    <!-- ==========================================================
+         FLOATING BOTTOM NAVIGATION BAR (KHUSUS HP / MOBILE)
+         ========================================================== -->
+    <nav id="mobileBottomNav" class="md:hidden fixed bottom-3 inset-x-3 z-40 no-print select-none">
+        <div class="relative max-w-md mx-auto h-[68px]">
+            
+            <!-- Latar Belakang Kapsul Putih dengan Lekukan Tengah (SVG) -->
+            <svg viewBox="0 0 380 68" preserveAspectRatio="none" class="w-full h-full drop-shadow-[0_6px_18px_rgba(15,23,42,0.12)]">
+                <path d="M 34,0 L 142,0 C 154,0 158,10 163,20 C 170,33 179,38 190,38 C 201,38 210,33 217,20 C 222,10 226,0 238,0 L 346,0 C 364.8,0 380,15.2 380,34 C 380,52.8 364.8,68 346,68 L 34,68 C 15.2,68 0,52.8 0,34 C 0,15.2 15.2,0 34,0 Z" fill="#ffffff"/>
+            </svg>
+
+            <!-- Tombol Bulat Hijau Tengah (Semua Menu) -->
+            <button onclick="toggleMobileMenuSheet()" aria-label="Semua Menu"
+                class="absolute left-1/2 -translate-x-1/2 -top-5 w-14 h-14 rounded-full bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white shadow-[0_8px_20px_rgba(4,120,87,0.38)] flex items-center justify-center transition z-10">
+                <!-- Ikon Grid 4 Kotak seperti gambar -->
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3.5" y="3.5" width="7" height="7" rx="2"/>
+                    <rect x="13.5" y="3.5" width="7" height="7" rx="2"/>
+                    <rect x="3.5" y="13.5" width="7" height="7" rx="2"/>
+                    <rect x="13.5" y="13.5" width="7" height="7" rx="2" fill-opacity="0.75"/>
+                </svg>
+            </button>
+
+            <!-- 4 Item Navigasi Kiri & Kanan -->
+            <div class="absolute inset-0 grid grid-cols-5 items-center px-2">
+                <!-- Kiri 1: Rekapan IWB -->
+                <button id="bnav-iwb" onclick="switchTab('iwb')" class="bnav-item active flex flex-col items-center justify-center gap-0.5 pt-1">
+                    <i class="fa-solid fa-table-cells text-base"></i>
+                    <span class="text-[10px] font-bold tracking-tight truncate max-w-[66px]">Rekapan IWB</span>
+                    <span class="bnav-indicator w-8 h-[3px] rounded-full bg-emerald-700 mt-0.5"></span>
+                </button>
+
+                <!-- Kiri 2: Kas Grup UPA -->
+                <button id="bnav-kas" onclick="switchTab('kas')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
+                    <i class="fa-solid fa-wallet text-base"></i>
+                    <span class="text-[10px] font-semibold tracking-tight truncate max-w-[66px]">Kas Grup UPA</span>
+                    <span class="bnav-indicator w-8 h-[3px] rounded-full bg-transparent mt-0.5"></span>
+                </button>
+
+                <!-- Spacer Tengah untuk Tombol Bulat -->
+                <div></div>
+
+                <!-- Kanan 1: Pinjaman Anggota -->
+                <button id="bnav-pinjaman" onclick="switchTab('pinjaman')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
+                    <i class="fa-solid fa-hand-holding-dollar text-base"></i>
+                    <span class="text-[10px] font-semibold tracking-tight truncate max-w-[66px]">Pinjaman</span>
+                    <span class="bnav-indicator w-8 h-[3px] rounded-full bg-transparent mt-0.5"></span>
+                </button>
+
+                <!-- Kanan 2: Rekap & Chart -->
+                <button id="bnav-rekap" onclick="switchTab('rekap')" class="bnav-item flex flex-col items-center justify-center gap-0.5 pt-1 text-slate-500">
+                    <i class="fa-solid fa-chart-line text-base"></i>
+                    <span class="text-[10px] font-semibold tracking-tight truncate max-w-[66px]">Rekap & Chart</span>
+                    <span class="bnav-indicator w-8 h-[3px] rounded-full bg-transparent mt-0.5"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================================
+         BOTTOM SHEET DRAWER: SEMUA MENU KEUANGAN (HP)
+         ========================================================== -->
+    <div id="mobileMenuSheet" class="md:hidden fixed inset-x-0 bottom-0 z-[70] bg-white rounded-t-3xl shadow-2xl border-t border-slate-200 transform translate-y-full transition-transform duration-300 ease-out no-print">
+        <div class="p-4 pb-6 max-h-[82vh] overflow-y-auto">
+            <!-- Handle Bar -->
+            <div class="w-10 h-1 bg-slate-300 rounded-full mx-auto mb-3"></div>
+            
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+                <div>
+                    <h3 class="text-sm font-extrabold text-slate-900">Menu Keuangan UPA</h3>
+                    <p class="text-[11px] text-slate-500">Pilih laporan atau catatan yang ingin dibuka</p>
+                </div>
+                <button onclick="closeMobileMenuSheet()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Grid 8 Menu dengan Tulisan & Judul Persis Seperti Sebelumnya -->
+            <div class="grid grid-cols-2 gap-2.5 text-xs">
+                <button id="snav-iwb" onclick="switchTab('iwb')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-table-cells"></i>
+                    </div>
+                    <span class="leading-tight">Rekapan IWB</span>
+                </button>
+
+                <button id="snav-ss" onclick="switchTab('ss')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="leading-tight">Sumbangan Sukarela</span>
+                </button>
+
+                <button id="snav-itb" onclick="switchTab('itb')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <span class="leading-tight">Rekapan ITB</span>
+                </button>
+
+                <button id="snav-kas" onclick="switchTab('kas')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <span class="leading-tight">Kas Grup UPA</span>
+                </button>
+
+                <button id="snav-pinjaman" onclick="switchTab('pinjaman')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <span class="leading-tight">Pinjaman Anggota</span>
+                </button>
+
+                <button id="snav-ceklis" onclick="switchTab('ceklis')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <span class="leading-tight">Ceklis Iuran UPA</span>
+                </button>
+
+                <button id="snav-bendahara" onclick="switchTab('bendahara')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <span class="leading-tight">Catatan Bendahara</span>
+                </button>
+
+                <button id="snav-rekap" onclick="switchTab('rekap')" class="snav-item flex items-center gap-2.5 p-3 rounded-2xl border border-slate-200 text-left font-bold text-slate-700 hover:bg-emerald-50 transition">
+                    <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <span class="leading-tight">Rekap & Chart</span>
+                </button>
+            </div>
+
+            <!-- Tombol Pengaturan Data (Khusus Editor) -->
+            <div class="mt-3 pt-3 border-t border-slate-100 editor-only">
+                <button onclick="closeMobileMenuSheet(); openSettingsModal();" class="w-full py-3 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-2 transition">
+                    <i class="fa-solid fa-gear text-emerald-700"></i>
+                    <span>Pengaturan Data (Backup / Restore)</span>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- SETTINGS MODAL -->
