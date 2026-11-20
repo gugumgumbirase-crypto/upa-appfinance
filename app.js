@@ -1534,3 +1534,38 @@ firebaseAuth.onAuthStateChanged(async (user) => {
     applyAuthUI();
     if (appInitialized) startCloudSync();
 });
+// ==========================================
+// PWA SERVICE WORKER & INSTALL PROMPT
+// ==========================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(() => console.log('PWA Service Worker aktif'))
+            .catch((err) => console.error('SW gagal:', err));
+    });
+}
+
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    const btnInstall = document.getElementById('btnInstallPWA');
+    if (btnInstall) btnInstall.classList.remove('hidden');
+});
+
+async function installPWA() {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    const { outcome } = await deferredInstallPrompt.userChoice;
+    if (outcome === 'accepted') {
+        document.getElementById('btnInstallPWA')?.classList.add('hidden');
+    }
+    deferredInstallPrompt = null;
+    closeMobileMenuSheet();
+}
+
+window.addEventListener('appinstalled', () => {
+    document.getElementById('btnInstallPWA')?.classList.add('hidden');
+    deferredInstallPrompt = null;
+});
